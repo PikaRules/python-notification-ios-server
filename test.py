@@ -1,4 +1,5 @@
 #http://nthn.me/posts/2012/push.html
+#https://developers.google.com/appengine/docs/python/sockets/ssl_support
 import ssl
 import json
 import socket
