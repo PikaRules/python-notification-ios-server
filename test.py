@@ -48,7 +48,7 @@ def send_push(token, payload):
 	    sock.close()
 
     except Exception, e:
-    	alert("Something's wrong with %s. Exception type is %s" % (apns_address, e))
+    	print("Something's wrong with %s. Exception type is %s" % (apns_address, e))
 
 
 test()

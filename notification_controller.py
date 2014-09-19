@@ -22,27 +22,33 @@ class NotificationController(webapp2.RequestHandler):
 
 		self.send_push(TOKEN,json.dumps(PAYLOAD))
 
-		self.response.write('sdfd')
+		self.response.write('   sdfd')
 
 
 	def send_push(self,token, payload):
 	    # Your certificate file
 	    cert = 'ck.pem'
 	    key = 'ck.key'
+	    host = 'gateway.sandbox.push.apple.com';
+	    host_ip = socket.gethostbyname( host )
 
-	    # APNS development server
-	    apns_address = ('ssl://gateway.sandbox.push.apple.com', 2195)
+	    try:
 
-	    # Use a socket to connect to APNS over SSL
-	    s = socket.socket()
-	    sock = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_SSLv3, certfile=cert, keyfile = key )
-	    sock.connect(apns_address)
+		    # APNS development server
+		    apns_address = (host, 2195)
 
-	    # Generate a notification packet
-	    token = binascii.unhexlify(token)
-	    fmt = '!cH32sH{0:d}s'.format(len(payload))
-	    cmd = '\x00'
-	    message = struct.pack(fmt, cmd, len(token), token, len(payload), payload)
-	    sock.write(message)
-	    #socket_status = sock.recv(1024)
-	    sock.close()
+		    # Use a socket to connect to APNS over SSL
+		    s = socket.socket()
+		    sock = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_SSLv3, certfile=cert, keyfile=key )
+		    sock.connect(apns_address)
+
+		    # Generate a notification packet
+		    token = binascii.unhexlify(token)
+		    fmt = '!cH32sH{0:d}s'.format(len(payload))
+		    cmd = '\x00'
+		    message = struct.pack(fmt, cmd, len(token), token, len(payload), payload)
+		    sock.write(message)
+		    sock.close()
+
+	    except Exception, e:
+	    	self.response.write("Something's wrong with %s. Exception type is %s" % (apns_address, e))
