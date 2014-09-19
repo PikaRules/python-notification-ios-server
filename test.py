@@ -1,4 +1,4 @@
-
+#http://nthn.me/posts/2012/push.html
 import ssl
 import json
 import socket
@@ -46,7 +46,7 @@ def send_push(token, payload):
 	    message = struct.pack(fmt, cmd, len(token), token, len(payload), payload)
 	    sock.write(message)
 	    sock.close()
-	    
+
     except Exception, e:
     	alert("Something's wrong with %s. Exception type is %s" % (apns_address, e))
 
