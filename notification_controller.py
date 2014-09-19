@@ -14,7 +14,7 @@ class NotificationController(webapp2.RequestHandler):
 		TOKEN = 'd319226142e39ee2401a99bd647f526557a032128f7c8ecb1dc973673b823636'
 		PAYLOAD = {
 		    'aps': {
-		        'alert': 'Hello Push!',
+		        'alert': 'jeje',
 		        'sound': 'default'
 		    }
 		}
@@ -22,6 +22,8 @@ class NotificationController(webapp2.RequestHandler):
 
 		self.send_push(TOKEN,json.dumps(PAYLOAD))
 
+		self.response.headers['Content-Type'] = 'text/plain'
+		self.response.write('finished')
 
 
 	def send_push(self,token, payload):
