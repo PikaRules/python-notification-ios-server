@@ -14,7 +14,7 @@ def test():
 	TOKEN = 'd319226142e39ee2401a99bd647f526557a032128f7c8ecb1dc973673b823636'
 	PAYLOAD = {
 	    'aps': {
-	        'alert': 'Hello Push!',
+	        'alert': 'hey mario que onda!',
 	        'sound': 'default'
 	    }
 	}

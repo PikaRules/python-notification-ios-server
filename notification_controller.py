@@ -22,7 +22,6 @@ class NotificationController(webapp2.RequestHandler):
 
 		self.send_push(TOKEN,json.dumps(PAYLOAD))
 
-		self.response.write('   sdfd')
 
 
 	def send_push(self,token, payload):
@@ -35,7 +34,7 @@ class NotificationController(webapp2.RequestHandler):
 	    try:
 
 		    # APNS development server
-		    apns_address = (host, 2195)
+		    apns_address = (host_ip, 2195)
 
 		    # Use a socket to connect to APNS over SSL
 		    s = socket.socket()
